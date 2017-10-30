@@ -26,3 +26,4 @@ end
 
 gem 'omniauth'
 gem 'devise_token_auth'
+gem 'acts-as-taggable-on', '~> 5.0'
