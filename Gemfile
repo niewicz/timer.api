@@ -27,3 +27,5 @@ end
 gem 'omniauth'
 gem 'devise_token_auth'
 gem 'acts-as-taggable-on', '~> 5.0'
+gem 'dry-validation', '~> 0.11.1'
+gem 'wisper', '2.0.0'
