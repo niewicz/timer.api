@@ -7,5 +7,5 @@ class User < ApplicationRecord
   has_many :clients
   has_many :projects
   has_many :tasks
-  has_many :time_entries, through: :tasks
+  has_many :time_entries
 end
