@@ -10,7 +10,7 @@ class Timer::TimeEntries::Update < Timer::BaseService
     prepare_params!
     ActiveRecord::Base.transaction do 
       @time_entry.assign_attributes(@params)
-      errors = ::TImer::TimeEntry::CreateForm.call(@time_entry.attributes).messages
+      errors = ::Timer::TimeEntry::CreateForm.call(@time_entry.attributes).messages
 
       if errors.none? && @time_entry.save(validate: false)
         broadcast(:time_entry_update_success, @time_entry)
@@ -24,7 +24,7 @@ class Timer::TimeEntries::Update < Timer::BaseService
   private
 
   def prepare_params!
-    @params[:start_at] = DateTime.parse(@params[:start_at])
+    @params[:start_at] = DateTime.parse(@params[:start_at]) if @params[:start_at].present?
     @params[:end_at] = DateTime.parse(@params[:end_at]) if @params[:end_at].present?
   end
 

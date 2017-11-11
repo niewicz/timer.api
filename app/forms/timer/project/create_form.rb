@@ -4,8 +4,8 @@ module Timer::Project
     # TODO validate title uniqueness
     required(:title).filled(:str?)
 
-    optional(:description).filled(:str?)
-    optional(:client_id).filled(:int?)
+    optional(:description).maybe(:str?)
+    optional(:client_id).maybe(:int?)
   end
 
 end

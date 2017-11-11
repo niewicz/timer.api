@@ -5,10 +5,10 @@ module Timer::Task
     # TODO validate title uniqueness
     required(:title).filled(:str?)
 
-    optional(:price).filled(:int?)
-    optional(:data).filled
-    optional(:project_id).filled(:int?)
-    optional(:client_id).filled(:int?)
+    optional(:price).maybe(:int?)
+    optional(:data).maybe
+    optional(:project_id).maybe(:int?)
+    optional(:client_id).maybe(:int?)
   end
 
 end
