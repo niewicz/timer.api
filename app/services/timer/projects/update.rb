@@ -8,7 +8,7 @@ class Timer::Projects::Update < Timer::BaseService
     def call
       ActiveRecord::Base.transaction do
         @project.assign_attributes(@params)
-        errors = ::Timer::Project::CreateForm.call(@project.attributes)
+        errors = ::Timer::Project::UpdateForm.call(@project.attributes)
   
         if errors.none? && @project.save(validate: false)
           broadcast(:project_create_success, @project)
