@@ -2,7 +2,7 @@ class Timer::TimeEntries::Get < Timer::BaseService
 
   def initialize(user, params)
     @user = user.presence || fail(ArgumentError)
-    @params = params.presence || fail(ArgumentError)
+    @params = params.presence || {}
   end
 
   def call
@@ -25,17 +25,17 @@ class Timer::TimeEntries::Get < Timer::BaseService
 
   def by_task!
     return unless @params[:task_id].present?
-    @ar_query.where(task_id: @params[:task_id])
+    @ar_query = @ar_query.where(task_id: @params[:task_id])
   end
 
   def by_project!
     return unless @params[:project_id].present?
-    @ar_query.where(project_id: @params[:project_id])
+    @ar_query = @ar_query.where(project_id: @params[:project_id])
   end
 
   def by_client!
     return unless @params[:client_id].present?
-    @ar_query.where(client_id: @params[:client_id])
+    @ar_query = @ar_query.where(client_id: @params[:client_id])
   end
 
   def since!

@@ -70,7 +70,9 @@ class ProjectsController < ApplicationController
   def filter_params
     params.slice(
       :q,
-      :client_id
+      :client_id,
+      :limit,
+      :offset
     )
   end
 
