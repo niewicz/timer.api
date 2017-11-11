@@ -12,7 +12,7 @@ class Timer::Clients::Update < Timer::BaseService
       errors = Timer::Client::UpdateForm.call(@client.attributes).messages
 
       if errors.none? && client.save(validate: false)
-        broadcast(:client_update_success, client)
+        broadcast(:client_update_success, @client)
       else
         broadcast(:client_update_failure, errors)
         fail(ActiveRecord::Rollback)

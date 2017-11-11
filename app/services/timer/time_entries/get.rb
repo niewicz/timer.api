@@ -24,18 +24,26 @@ class Timer::TimeEntries::Get < Timer::BaseService
   private
 
   def by_task!
-  end
-
-  def by_client!
+    return unless @params[:task_id].present?
+    @ar_query.where(task_id: @params[:task_id])
   end
 
   def by_project!
+    return unless @params[:project_id].present?
+    @ar_query.where(project_id: @params[:project_id])
+  end
+
+  def by_client!
+    return unless @params[:client_id].present?
+    @ar_query.where(client_id: @params[:client_id])
   end
 
   def since!
+    p 'not implemented!'
   end
 
   def to!
+    p 'not implemented!'
   end
 
   def offset!
