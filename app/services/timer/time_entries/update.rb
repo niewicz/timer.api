@@ -1,6 +1,7 @@
 class Timer::TimeEntries::Update < Timer::BaseService
+  include Wisper::Publisher
   
-  def intiliazie(time_entry, params)
+  def initialize(time_entry, params)
     @time_entry = time_entry.presence || fail(ArgumentError)
     @params = params.presence || fail(ArgumentError)
   end

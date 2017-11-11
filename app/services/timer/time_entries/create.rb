@@ -1,6 +1,7 @@
 class Timer::TimeEntries::Create < Timer::BaseService
+  include Wisper::Publisher
 
-  def intiliazie(user, params)
+  def initialize(user, params)
     @user = user.presence || fail(ArgumentError)
     @params = params.presence || fail(ArgumentError)
   end
@@ -9,7 +10,7 @@ class Timer::TimeEntries::Create < Timer::BaseService
     prepare_params!
     ActiveRecord::Base.transaction do 
       time_entry = @user.time_entries.new(@params)
-      errors = ::TImer::TimeEntry::CreateForm.call(time_entry.attributes).messages
+      errors = ::Timer::TimeEntry::CreateForm.call(time_entry.attributes).messages
 
       if errors.none? && time_entry.save(validate: false)
         broadcast(:time_entry_create_success, time_entry)

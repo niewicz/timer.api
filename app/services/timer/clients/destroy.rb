@@ -1,5 +1,6 @@
 class Timer::Clients::Destroy < Timer::BaseService
-
+  include Wisper::Publisher
+  
   def initialize(client)
     @client = client.presence || fail(ArgumentError)
   end

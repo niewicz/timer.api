@@ -2,7 +2,7 @@ module Timer::Task
   
   CreateForm = Dry::Validation::Schema(Timer::BaseForm) do
     # TODO validate title uniqueness
-    require(:title).filled(:str?)
+    required(:title).filled(:str?)
 
     optional(:price).filled(:int?)
     optional(:data).filled

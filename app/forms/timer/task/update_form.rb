@@ -1,9 +1,9 @@
 module Timer::Task
   
   UpdateForm = Dry::Validation::Schema(Timer::BaseForm) do
-    require(:id).filled(:int?)
+    required(:id).filled(:int?)
     # TODO validate title uniqueness
-    require(:title).filled(:str?)
+    required(:title).filled(:str?)
 
     optional(:price).filled(:int?)
     optional(:data).filled

@@ -1,4 +1,5 @@
 class Timer::Tasks::Destroy < Timer::BaseService
+  include Wisper::Publisher
   
   def initialize(task)
     @task = task.presence || fail(ArgumentError)

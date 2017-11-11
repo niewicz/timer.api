@@ -7,7 +7,7 @@ class TimeEntriesController < ApplicationController
   end
 
   def create
-    svc = Timer::TimeEntries::Create(current_user, time_entry_params)
+    svc = Timer::TimeEntries::Create.new(current_user, time_entry_params)
 
     svc.on(:time_entry_create_success) do |val|
       render json: val
@@ -20,7 +20,7 @@ class TimeEntriesController < ApplicationController
   end
 
   def update
-    svc = Timer::TimeEntries::Update(time_entry, time_entry_params)
+    svc = Timer::TimeEntries::Update.new(time_entry, time_entry_params)
     
     svc.on(:time_entry_update_success) do |val|
       render json: val

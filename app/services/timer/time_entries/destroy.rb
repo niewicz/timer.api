@@ -1,4 +1,5 @@
 class Timer::TimeEntries::Destroy < Timer::BaseService
+  include Wisper::Publisher
   
   def initialize(time_entry)
     @time_entry = time_entry.presence || fail(ArgumentError)

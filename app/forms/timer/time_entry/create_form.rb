@@ -1,9 +1,9 @@
 module Timer::TimeEntry
 
   CreateForm = Dry::Validation::Schema(Timer::BaseForm) do
-    require(:start_at).filled(:datetime?)
+    required(:start_at).filled(:date_time?)
 
-    optional(:end_at).maybe(:datetime?)
+    optional(:end_at).maybe(:date_time?)
     optional(:task_id).maybe(:int?)
   end
 

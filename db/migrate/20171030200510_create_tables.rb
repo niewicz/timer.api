@@ -32,6 +32,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
 
     create_table :time_entries do |t|
       t.belongs_to :task,     index: true
+      t.belongs_to :user,     index: true
       t.datetime :start_at,   null: false
       t.datetime :end_at
 

@@ -1,4 +1,5 @@
 class Timer::Projects::Create < Timer::BaseService
+  include Wisper::Publisher
 
   def initialize(user, params)
     @user = user.presence || fail(ArgumentError)

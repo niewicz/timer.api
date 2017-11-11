@@ -1,4 +1,5 @@
 class Timer::Tasks::Create < Timer::BaseService
+  include Wisper::Publisher
   
   def initialize(task, params)
     @task= task.presence || fail(ArgumentError)
