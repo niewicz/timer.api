@@ -1,7 +1,6 @@
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
-          :recoverable, :rememberable, :trackable, :validatable,
-          :confirmable
+          :recoverable, :trackable, :validatable
   include DeviseTokenAuth::Concerns::User
 
   has_many :clients
