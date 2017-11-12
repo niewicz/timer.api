@@ -1,4 +1,4 @@
-class ClientsController < ApplicationController
+class Api::ClientsController < ApplicationController
 
   def index
     clients = Timer::Clients::Get.new(current_user, params[:q]).call

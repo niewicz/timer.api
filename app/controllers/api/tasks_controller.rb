@@ -1,4 +1,4 @@
-class TasksController < ApplicationController
+class Api::TasksController < ApplicationController
   
   def index
     tasks = Timer::Tasks::Get.new(current_user, filter_params)

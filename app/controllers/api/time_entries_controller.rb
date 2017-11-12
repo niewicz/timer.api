@@ -1,4 +1,4 @@
-class TimeEntriesController < ApplicationController
+class Api::TimeEntriesController < ApplicationController
   
   def index
     time_entries = Timer::TimeEntries::Get.new(current_user, filter_params).call
