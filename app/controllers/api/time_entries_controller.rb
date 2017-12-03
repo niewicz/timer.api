@@ -1,9 +1,8 @@
 class Api::TimeEntriesController < ApplicationController
   
   def index
-    time_entries = Timer::TimeEntries::Get.new(current_user, filter_params).call
-
-    render json: time_entries
+    @time_entries = Timer::TimeEntries::Get.new(current_user, filter_params).call
+    render :index, formats: :json
   end
 
   def create
