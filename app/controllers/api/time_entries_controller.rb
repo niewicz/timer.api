@@ -63,8 +63,6 @@ class Api::TimeEntriesController < ApplicationController
       :limit,
       :offset,
       :task_id,
-      :client_id,
-      :project_id,
       :since,
       :to
     )

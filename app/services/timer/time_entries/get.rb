@@ -7,10 +7,9 @@ class Timer::TimeEntries::Get < Timer::BaseService
 
   def call
     @ar_query = @user.time_entries
+    @ar_query = @ar_query.where('end_at IS NOT NULL')
 
     by_task!
-    by_client!
-    by_project!
 
     since!
     to!
@@ -26,16 +25,6 @@ class Timer::TimeEntries::Get < Timer::BaseService
   def by_task!
     return unless @params[:task_id].present?
     @ar_query = @ar_query.where(task_id: @params[:task_id])
-  end
-
-  def by_project!
-    return unless @params[:project_id].present?
-    @ar_query = @ar_query.where(project_id: @params[:project_id])
-  end
-
-  def by_client!
-    return unless @params[:client_id].present?
-    @ar_query = @ar_query.where(client_id: @params[:client_id])
   end
 
   def since!
