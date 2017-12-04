@@ -1,9 +1,8 @@
 class Api::ClientsController < ApplicationController
 
   def index
-    clients = Timer::Clients::Get.new(current_user, params[:q]).call
-
-    render json: clients
+    @clients = Timer::Clients::Get.new(current_user, params[:q]).call
+    render :index, formats: :json
   end
 
   def show

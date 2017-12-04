@@ -1,9 +1,8 @@
 class Api::ProjectsController < ApplicationController
   
   def index
-    projects = Timer::Projects::Get.new(current_user, filter_params).call
-
-    render json: projects
+    @projects = Timer::Projects::Get.new(current_user, filter_params).call
+    render :index, formats: :json
   end
 
   def show

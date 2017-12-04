@@ -1,9 +1,8 @@
 class Api::TasksController < ApplicationController
   
   def index
-    tasks = Timer::Tasks::Get.new(current_user, filter_params)
-
-    render json: tasks
+    @tasks = Timer::Tasks::Get.new(current_user, filter_params)
+    render :index, formats: :json
   end
 
   def show
