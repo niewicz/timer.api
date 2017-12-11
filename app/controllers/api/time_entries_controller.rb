@@ -5,11 +5,17 @@ class Api::TimeEntriesController < ApplicationController
     render :index, formats: :json
   end
 
+  def current
+    @time_entry = Timer::TimeEntries::Current.new(current_user).call
+    render :current, formats: :json
+  end
+
   def create
     svc = Timer::TimeEntries::Create.new(current_user, time_entry_params)
 
     svc.on(:time_entry_create_success) do |val|
-      render json: val
+      @time_entry = val
+      render :create, formats: :json
     end
     svc.on(:time_entry_create_failure) do |errors|
       render json: errors, status: 422
@@ -22,7 +28,8 @@ class Api::TimeEntriesController < ApplicationController
     svc = Timer::TimeEntries::Update.new(time_entry, time_entry_params)
     
     svc.on(:time_entry_update_success) do |val|
-      render json: val
+      @time_entry = val
+      render :update, formats: :json
     end
     svc.on(:time_entry_update_failure) do |errors|
       render json: errors, status: 422
