@@ -6,14 +6,16 @@ class Api::ClientsController < ApplicationController
   end
 
   def show
-    render json: client
+    client
+    render :show, formats: :json
   end
 
   def create
     svc = Timer::Clients::Create.new(current_user, client_params)
 
     svc.on(:client_create_success) do |val|
-      render json: val
+      @client = val
+      render :create, formats: :json
     end
     svc.on(:client_create_failure) do |errors|
       render json: errors, status: 422
@@ -23,14 +25,16 @@ class Api::ClientsController < ApplicationController
   end
 
   def edit
-    render json: client
+    client
+    render :edit, formats: :json
   end
 
   def update
     svc = Timer::Clients::Update.new(client, client_params)
     
     svc.on(:client_create_success) do |val|
-      render json: val
+      @client = val
+      render :update, formats: :json
     end
     svc.on(:client_create_failure) do |errors|
       render json: errors, status: 422
