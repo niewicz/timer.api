@@ -6,14 +6,16 @@ class Api::ProjectsController < ApplicationController
   end
 
   def show
-    render json: project
+    project
+    render :show, formats: :json
   end
 
   def create
     svc = Timer::Projects::Create.new(current_user, project_params)
     
     svc.on(:project_create_success) do |val|
-      render json: val
+      @project = val
+      render :create, formats: :json
     end
     svc.on(:project_create_failure) do |errors|
       render json: errors, status: 422
@@ -23,14 +25,16 @@ class Api::ProjectsController < ApplicationController
   end
 
   def edit
-    render json: project
+    project
+    render :edit, formats: :json
   end
 
   def update
     svc = Timer::Projects::Update.new(project, project_params)
     
     svc.on(:project_update_success) do |val|
-      render json: val
+      @project = val
+      render :update, formats: :json
     end
     svc.on(:project_update_failure) do |errors|
       render json: errors, status: 422
@@ -59,7 +63,7 @@ class Api::ProjectsController < ApplicationController
   end
 
   def project_params
-    params.require(:proejct).permit(
+    params.require(:project).permit(
       :title,
       :description,
       :client_id
