@@ -1,7 +1,7 @@
 class Api::ClientsController < ApplicationController
 
   def index
-    @clients = Timer::Clients::Get.new(current_user, params[:q]).call
+    @clients = Timer::Clients::Get.new(current_user, filter_params).call
     render :index, formats: :json
   end
 
@@ -60,6 +60,14 @@ class Api::ClientsController < ApplicationController
 
   def client
     @client ||= current_user.clients.find(params[:id])
+  end
+
+  def filter_params
+    params.slice(
+      :q,
+      :limit,
+      :offset
+    )
   end
 
   def client_params

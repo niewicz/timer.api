@@ -26,7 +26,7 @@ class Timer::Projects::Get < Timer::BaseService
 
   def search!
     return unless @params[:q].present?
-    @ar_query = @ar_query.where('title LIKE ?', @params[:q])
+    @ar_query = @ar_query.where('title ilike ?', "%#{@params[:q]}%")
   end
 
   def offset!
