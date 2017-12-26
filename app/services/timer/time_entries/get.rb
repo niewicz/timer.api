@@ -14,6 +14,7 @@ class Timer::TimeEntries::Get < Timer::BaseService
     since!
     to!
 
+    order!
     offset!
     limit!
 
@@ -33,6 +34,10 @@ class Timer::TimeEntries::Get < Timer::BaseService
 
   def to!
     p 'not implemented!'
+  end
+
+  def order!
+    @ar_query = @ar_query.order('start_at DESC')
   end
 
   def offset!
