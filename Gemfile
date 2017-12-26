@@ -10,6 +10,7 @@ gem 'pg', '~> 0.21.0'
 gem 'puma', '~> 3.7'
 gem 'jbuilder', '~> 2.5'
 gem 'rack-cors'
+gem 'rails-ujs'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -30,3 +31,5 @@ gem 'devise_token_auth'
 gem 'acts-as-taggable-on', '~> 5.0'
 gem 'dry-validation', '~> 0.11.1'
 gem 'wisper', '2.0.0'
+
+ruby "2.4.2"
