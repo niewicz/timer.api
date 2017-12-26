@@ -4,7 +4,7 @@ class Api::TimeEntriesController < ApplicationController
     svc = Timer::TimeEntries::Get.new(current_user, filter_params)
     @time_entries = svc.call
     @total = svc.total
-    
+
     render :index, formats: :json
   end
 
@@ -64,7 +64,8 @@ class Api::TimeEntriesController < ApplicationController
     params.require(:time_entry).permit(
       :start_at,
       :end_at,
-      :task_id
+      :task_id,
+      :project_id,
     )
   end
 

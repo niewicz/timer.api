@@ -46,11 +46,13 @@ class Timer::TimeEntries::Get < Timer::BaseService
 
   def offset!
     offset = @params[:offset] || 0
+    p offset
     @ar_query = @ar_query.offset(offset)
   end
 
   def limit!
     limit = @params[:limit].presence || 10
+    p limit
     @ar_query = @ar_query.limit(limit)
   end
 

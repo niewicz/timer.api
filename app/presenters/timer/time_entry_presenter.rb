@@ -6,8 +6,9 @@ class Timer::TimeEntryPresenter < Timer::BasePresenter
   end
 
   def project
-    return unless object.task.present? && object.task.project.present?
-    object.task.project
+    return object.task.project if object.task.present? && object.task.project.present?
+    return object.project if object.project.present?
+    return
   end
 
   def client
