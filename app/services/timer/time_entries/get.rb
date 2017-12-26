@@ -1,5 +1,7 @@
 class Timer::TimeEntries::Get < Timer::BaseService
 
+  attr_reader :total
+
   def initialize(user, params)
     @user = user.presence || fail(ArgumentError)
     @params = params.presence || {}
@@ -13,6 +15,8 @@ class Timer::TimeEntries::Get < Timer::BaseService
 
     since!
     to!
+
+    @total = @ar_query.count
 
     order!
     offset!
