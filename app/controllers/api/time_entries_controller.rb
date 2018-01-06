@@ -28,7 +28,7 @@ class Api::TimeEntriesController < ApplicationController
   end
 
   def update
-    svc = Timer::TimeEntries::Update.new(time_entry, time_entry_params)
+    svc = Timer::TimeEntries::Update.new(current_user, time_entry, time_entry_params)
     
     svc.on(:time_entry_update_success) do |val|
       @time_entry = val

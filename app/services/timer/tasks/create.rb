@@ -10,7 +10,7 @@ class Timer::Tasks::Create < Timer::BaseService
     ActiveRecord::Base.transaction do
       task = @user.tasks.new(@params)
       errors = ::Timer::Task::CreateForm.call(task.attributes).messages
-p errors
+
       if errors.none? && task.save(validate: false)
         broadcast(:task_create_success, task)
       else

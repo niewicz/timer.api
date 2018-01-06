@@ -1,7 +1,8 @@
 class Timer::TimeEntries::Update < Timer::BaseService
   include Wisper::Publisher
   
-  def initialize(time_entry, params)
+  def initialize(user, time_entry, params)
+    @user = user.presence || fail(ArgumentError)
     @time_entry = time_entry.presence || fail(ArgumentError)
     @params = params.presence || fail(ArgumentError)
   end
@@ -13,6 +14,7 @@ class Timer::TimeEntries::Update < Timer::BaseService
       errors = ::Timer::TimeEntry::CreateForm.call(@time_entry.attributes).messages
 
       if errors.none? && @time_entry.save(validate: false)
+        @user.tasks.includes(:time_entries).where(time_entries: {task_id: nil}).destroy_all
         broadcast(:time_entry_update_success, @time_entry)
       else
         broadcast(:time_entry_update_failure, errors)

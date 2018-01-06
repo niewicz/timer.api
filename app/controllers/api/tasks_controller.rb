@@ -6,14 +6,16 @@ class Api::TasksController < ApplicationController
   end
 
   def show
-    render json: task
+    task
+    render :show, formats: :json
   end
 
   def create
     svc = Timer::Tasks::Create.new(current_user, task_params)
     
     svc.on(:task_create_success) do |val|
-      render json: val
+      @task = val
+      render :create, formats: :json
     end
     svc.on(:task_create_failure) do |errors|
       render json: errors, status: 422
@@ -30,7 +32,7 @@ class Api::TasksController < ApplicationController
     svc = Timer::Tasks::Update.new(task, task_params)
     
     svc.on(:task_update_success) do |val|
-      render json: val
+      render :update, formats: :json
     end
     svc.on(:task_update_failure) do |errors|
       render json: errors, status: 422
