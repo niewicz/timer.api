@@ -2,7 +2,8 @@ if task.present?
   json.(task,
     :id,
     :title,
-    :price)
+    :price,
+    :project_id)
   
   json.project do
     json.partial! 'api/projects/project_simple', project: task.project

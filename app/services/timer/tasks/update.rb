@@ -1,4 +1,4 @@
-class Timer::Tasks::Create < Timer::BaseService
+class Timer::Tasks::Update < Timer::BaseService
   include Wisper::Publisher
   
   def initialize(task, params)
