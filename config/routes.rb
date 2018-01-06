@@ -3,9 +3,13 @@ Rails.application.routes.draw do
 
   namespace :api do
     resources :clients
+    
     resources :projects
+
     resources :tasks
-    resources :time_entries
+
+    get 'time_entries/current', to: 'time_entries#current'
+    resources :time_entries 
   end
 
 end
