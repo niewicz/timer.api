@@ -41,7 +41,7 @@ class Api::TimeEntriesController < ApplicationController
     svc.call
   end
 
-  def destory
+  def destroy
     svc = Timer::TimeEntries::Destroy.new(time_entry).call
     
     svc.on(:time_entry_destroy_success) do |val|
