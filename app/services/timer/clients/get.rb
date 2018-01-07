@@ -14,6 +14,7 @@ class Timer::Clients::Get < Timer::BaseService
 
     @total = @ar_query.count
 
+    order!
     offset!
     limit!
 
@@ -25,6 +26,10 @@ class Timer::Clients::Get < Timer::BaseService
   def search!
     return unless @params[:q]
     @ar_query = @ar_query.where('name ilike ?', "%#{@params[:q]}%")
+  end
+
+  def order!
+    @ar_query = @ar_query.order('name ASC')
   end
 
   def offset!

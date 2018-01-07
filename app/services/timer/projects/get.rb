@@ -1,5 +1,7 @@
 class Timer::Projects::Get < Timer::BaseService
   
+  attr_reader :total
+
   def initialize(user, params)
     @user = user.presence || fail(ArgumentError)
     @params = params.presence || {}
@@ -11,6 +13,9 @@ class Timer::Projects::Get < Timer::BaseService
     by_client!
     search!
 
+    @total = @ar_query.count
+
+    order!
     offset!
     limit!
     
@@ -22,6 +27,10 @@ class Timer::Projects::Get < Timer::BaseService
   def by_client!
     return unless @params[:client_id].present?
     @ar_query = @ar_query.where(client_id: @params[:client_id])
+  end
+
+  def order!
+    @ar_query = @ar_query.order('title ASC')
   end
 
   def search!

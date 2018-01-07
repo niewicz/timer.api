@@ -41,7 +41,7 @@ class Api::TasksController < ApplicationController
     svc.call
   end
 
-  def destory
+  def destroy
     svc = Timer::Tasks::Destroy.new(task).call
     
     svc.on(:task_destroy_success) do |val|

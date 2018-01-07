@@ -4,7 +4,7 @@ class Api::ClientsController < ApplicationController
     svc = Timer::Clients::Get.new(current_user, filter_params)
     @clients = svc.call
     @total = svc.total
-    
+
     render :index, formats: :json
   end
 
@@ -46,7 +46,7 @@ class Api::ClientsController < ApplicationController
     svc.call
   end
 
-  def destory
+  def destroy
     svc = Timer::Clients::Destroy.new(client).call
 
     svc.on(:client_destroy_success) do |val|
