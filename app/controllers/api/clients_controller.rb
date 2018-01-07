@@ -1,7 +1,10 @@
 class Api::ClientsController < ApplicationController
 
   def index
-    @clients = Timer::Clients::Get.new(current_user, filter_params).call
+    svc = Timer::Clients::Get.new(current_user, filter_params)
+    @clients = svc.call
+    @total = svc.total
+    
     render :index, formats: :json
   end
 

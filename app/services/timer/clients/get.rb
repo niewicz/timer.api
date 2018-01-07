@@ -1,5 +1,7 @@
 class Timer::Clients::Get < Timer::BaseService
 
+  attr_reader :total
+
   def initialize(user, params)
     @user = user.presence || fail(ArgumentError)
     @params = params.presence || {}
@@ -9,6 +11,9 @@ class Timer::Clients::Get < Timer::BaseService
     @ar_query = @user.clients
 
     search!
+
+    @total = @ar_query.count
+
     offset!
     limit!
 
