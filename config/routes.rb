@@ -2,14 +2,14 @@ Rails.application.routes.draw do
   mount_devise_token_auth_for 'User', at: 'auth'
 
   namespace :api do
-    resources :clients
+    resources :clients, defaults: {format: 'json'}
     
-    resources :projects
+    resources :projects, defaults: {format: 'json'}
 
-    resources :tasks
+    resources :tasks, defaults: {format: 'json'}
 
     get 'time_entries/current', to: 'time_entries#current'
-    resources :time_entries 
+    resources :time_entries, defaults: {format: 'json'}
   end
 
 end

@@ -2,7 +2,7 @@ class Timer::Projects::Destroy < Timer::BaseService
   include Wisper::Publisher
   
   def initialize(project)
-    @project = proejct.presence || fail(ArgumentError)
+    @project = project.presence || fail(ArgumentError)
   end
 
   def call
