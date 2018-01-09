@@ -1,6 +1,6 @@
 module Timer::Client
   
-  CreateForm = Dry::Validation::Schema(Timer::BaseForm) do
+  UpdateForm = Dry::Validation::Schema(Timer::BaseForm) do
     required(:id).filled(:int?)
     # TODO validate name uniqueness
     required(:name).filled(:str?)
