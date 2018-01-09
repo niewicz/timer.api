@@ -32,5 +32,6 @@ gem 'acts-as-taggable-on', '~> 5.0'
 gem 'dry-validation', '~> 0.11.1'
 gem 'wisper', '2.0.0'
 gem 'turbolinks'
+gem 'uglifier'
 
 ruby "2.4.2"
