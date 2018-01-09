@@ -70,13 +70,13 @@ class Api::TimeEntriesController < ApplicationController
   end
 
   def filter_params
-    params.slice(
+    params.permit(
       :limit,
       :offset,
       :task_id,
       :since,
       :to
-    )
+    ).to_h
   end
   
 end

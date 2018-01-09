@@ -74,12 +74,12 @@ class Api::ProjectsController < ApplicationController
   end
 
   def filter_params
-    params.slice(
+    params.permit(
       :q,
       :client_id,
       :limit,
       :offset
-    )
+    ).to_h
   end
 
 end

@@ -66,11 +66,11 @@ class Api::ClientsController < ApplicationController
   end
 
   def filter_params
-    params.slice(
+    params.permit(
       :q,
       :limit,
       :offset
-    )
+    ).to_h
   end
 
   def client_params

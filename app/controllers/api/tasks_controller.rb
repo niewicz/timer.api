@@ -71,13 +71,13 @@ class Api::TasksController < ApplicationController
   end
 
   def filter_params
-    params.slice(
+    params.permit(
       :q,
       :limit,
       :offset,
       :project_id,
       :client_id
-    )
+    ).to_h
   end
   
 end
