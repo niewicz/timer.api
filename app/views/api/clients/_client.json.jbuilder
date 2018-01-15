@@ -4,7 +4,7 @@ if client.present?
     :name,
     :email,
     :contact_person_name,
-    :Contact_person_email)
+    :contact_person_email)
 else
   json.nil!
 end
