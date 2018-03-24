@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     resources :tasks, defaults: {format: 'json'}
 
     get 'time_entries/current', to: 'time_entries#current'
+    get 'time_entries/grouped', to: 'time_entries#index_grouped'
     resources :time_entries, defaults: {format: 'json'}
 
     get 'summaries/workload', to: 'summaries#workload_chart'

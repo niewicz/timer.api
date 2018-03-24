@@ -33,11 +33,16 @@ class Timer::TimeEntries::Get < Timer::BaseService
   end
 
   def since!
-    p 'not implemented!'
+    return unless @params[:since].present?
+    since = @params[:since].is_a?(String) ? Time.zone.parse(@params[:since]) : @params[:since]
+    since = since.beginning_of_day
+    @ar_query = @ar_query.where('start_at >= ?', since)
   end
 
   def to!
-    p 'not implemented!'
+    return unless @params[:to].present?
+    to = @params[:to].is_a?(String) ? Time.zome.parse(@params[:to]) : @params[:to]
+    @ar_query = @ar_query.where('start_at <= ?', to)
   end
 
   def order!
@@ -46,13 +51,11 @@ class Timer::TimeEntries::Get < Timer::BaseService
 
   def offset!
     offset = @params[:offset] || 0
-    p offset
     @ar_query = @ar_query.offset(offset)
   end
 
   def limit!
     limit = @params[:limit].presence || 10
-    p limit
     @ar_query = @ar_query.limit(limit)
   end
 

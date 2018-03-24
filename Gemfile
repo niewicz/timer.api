@@ -33,5 +33,6 @@ gem 'dry-validation', '~> 0.11.1'
 gem 'wisper', '2.0.0'
 gem 'turbolinks'
 gem 'uglifier'
+gem 'groupdate'
 
 ruby "2.4.2"

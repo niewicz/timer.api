@@ -8,6 +8,15 @@ class Api::TimeEntriesController < ApplicationController
     render :index, formats: :json
   end
 
+  def index_grouped
+    svc = Timer::TimeEntries::Get::Grouped.new(current_user, filter_params)
+    @grouped_time_entries = svc.call
+    @total = svc.total
+
+    p @grouped_time_entries
+    render :index_grouped, formats: :json
+  end
+
   def current
     @time_entry = Timer::TimeEntries::Current.new(current_user).call
     render :current, formats: :json
