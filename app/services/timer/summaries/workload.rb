@@ -48,8 +48,32 @@ class Timer::Summaries::Workload
   private 
   
   def prepare_params!
-    @range_start = @params[:day_start] ? Time.zone.parse(@params[:day_start]) : Time.zone.now.beginning_of_day - 6.days
-    @range_end = @params[:day_end] ? Time.zone.parse(@params[:day_end]) : Time.zone.now.beginning_of_day
+
+    if @params[:day_start].present? && @params[:day_end].present?
+      @range_start = parse_date(@params[:day_start])
+      @range_end = parse_date(@params[:day_end])
+    else
+      case @params[:time_range]
+      when 'this_week'
+        @range_start = Time.zone.now.beginning_of_week
+        @range_end = Time.zone.now.end_of_week
+      when 'this_month'
+        @range_start = Time.zone.now.beginning_of_month
+        @range_end = Time.zone.now.end_of_month
+      when 'last_week'
+        @range_start = Time.zone.now.last_week
+        @range_end = Time.zone.now.last_week.end_of_week
+      when 'last_month'
+        @range_start = Time.zone.now.last_month
+        @range_end = Time.zone.now.last_month.end_of_month  
+      else
+        @range_start = Time.zone.now.beginning_of_day - 6.days
+        @range_end = Time.zone.now.beginning_of_day
+      end
+    end
+  end
+
+  def parse_date(date)
   end
 
 end
