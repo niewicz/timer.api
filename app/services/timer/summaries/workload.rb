@@ -1,5 +1,7 @@
 class Timer::Summaries::Workload
 
+  attr_reader :results, :total_time
+
   def initialize(user, params)
     @user = user.presence || fail(ArgumentError)
     @params = params.presence || fail(ArgumentError)
@@ -8,7 +10,7 @@ class Timer::Summaries::Workload
   def call
     prepare_params!
 
-    results = []
+    @results = []
 
     (@range_start.to_i..@range_end.to_i).step(1.days.to_i) do |date_i|
       total = 0
@@ -36,10 +38,11 @@ class Timer::Summaries::Workload
         end.reduce(:+)
       end
 
-      results << { name: Time.at(date_i).to_date.to_s, value: total }
+      @results << { name: Time.at(date_i).to_date.to_s, value: total }
     end
 
-    results
+    @total_time = @results.map{ |i| i[:value] }.reduce(:+) 
+    @results
   end
 
   private 

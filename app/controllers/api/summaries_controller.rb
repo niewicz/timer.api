@@ -1,12 +1,15 @@
 class Api::SummariesController < ApplicationController
 
   def workload_chart
-    results = ::Timer::Summaries::Workload.new(current_user, params).call
+    svc = ::Timer::Summaries::Workload.new(current_user, params)
+    @results = svc.call
+    @total = svc.total_time
 
-    render json: { 
-      data: results, 
-      total: results.map{ |i| i[:value] }.reduce(:+) 
-    }
+    render :workload_chart, formats: :json
+  end
+
+  def last_projects
+
   end
 
 end
