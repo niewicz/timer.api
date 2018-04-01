@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     resources :time_entries, defaults: {format: 'json'}
 
     get 'summaries/workload', to: 'summaries#workload_chart'
+    get 'summaries/last_projects', to: 'summaries#last_projects'
   end
 
 end

@@ -9,7 +9,9 @@ class Api::SummariesController < ApplicationController
   end
 
   def last_projects
+    @projects = current_user.projects.order('id DESC').limit(4)
 
+    render :last_projects, formats: :json
   end
 
 end
