@@ -11,7 +11,7 @@ class Timer::Clients::Update < Timer::BaseService
       @client.assign_attributes(@params)
       errors = Timer::Client::UpdateForm.call(@client.attributes).messages
 
-      if errors.none? && client.save(validate: false)
+      if errors.none? && @client.save(validate: false)
         broadcast(:client_update_success, @client)
       else
         broadcast(:client_update_failure, errors)

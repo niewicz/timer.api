@@ -10,10 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171111150327) do
+ActiveRecord::Schema.define(version: 20180607215624) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "billing_profiles", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "email", null: false
+    t.string "person_name", null: false
+    t.string "company_name"
+    t.string "phone"
+    t.string "address"
+    t.string "city"
+    t.string "postal_code"
+    t.string "country"
+    t.string "account_owner"
+    t.string "iban"
+    t.string "swift_code"
+    t.string "currency"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_billing_profiles_on_user_id"
+  end
 
   create_table "clients", force: :cascade do |t|
     t.bigint "user_id"
@@ -23,6 +42,7 @@ ActiveRecord::Schema.define(version: 20171111150327) do
     t.string "contact_person_email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "auto_send", default: false
     t.index ["name"], name: "index_clients_on_name"
     t.index ["user_id"], name: "index_clients_on_user_id"
   end

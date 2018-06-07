@@ -7,6 +7,7 @@ module Timer::Client
     optional(:email).maybe(:str?)
     optional(:contact_person_name).maybe(:str?)
     optional(:contact_person_email).maybe(:str?)
+    optional(:auto_send).maybe(:bool?)
   end
 
 end

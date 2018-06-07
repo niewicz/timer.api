@@ -7,4 +7,6 @@ class User < ApplicationRecord
   has_many :projects
   has_many :tasks
   has_many :time_entries
+
+  has_one :billing_profile
 end

@@ -14,6 +14,9 @@ Rails.application.routes.draw do
 
     get 'summaries/workload', to: 'summaries#workload_chart'
     get 'summaries/last_projects', to: 'summaries#last_projects'
+
+    get 'users/current', to: 'users#show'
+    put 'users/update_billing_profile', to: 'users#update_billing_profile'
   end
 
 end

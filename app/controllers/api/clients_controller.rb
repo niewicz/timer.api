@@ -78,7 +78,8 @@ class Api::ClientsController < ApplicationController
       :name,
       :email,
       :contact_person_name,
-      :contact_person_email
+      :contact_person_email,
+      :auto_send
     )
   end
 
