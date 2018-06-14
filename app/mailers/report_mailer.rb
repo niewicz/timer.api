@@ -1,12 +1,13 @@
 class ReportMailer < ApplicationMailer
 
-  def report_email(client)
+  def report_email(client, start_time = nil, end_time = nil)
     fail unless client.present?
 
+    Time.zone = client.user.timezone
     @client = client
 
-    @start_time = Time.zone.now.beginning_of_month - 1.month
-    @end_time = @start_time.end_of_month
+    @start_time = start_time || Time.zone.now.beginning_of_month - 1.month
+    @end_time = end_time || @start_time.end_of_month
      
     @time_entries = @client.time_entries
       .where('end_at IS NOT NULL')

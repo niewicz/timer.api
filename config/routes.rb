@@ -17,6 +17,7 @@ Rails.application.routes.draw do
 
     get 'users/current', to: 'users#show'
     put 'users/update_billing_profile', to: 'users#update_billing_profile'
+    put 'users/current/set_timezone', to: 'users#set_timezone'
   end
 
 end

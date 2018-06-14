@@ -17,6 +17,19 @@ class Api::UsersController < ApplicationController
     svc.call
   end
 
+  def set_timezone
+    svc = Timer::Users::SetTimezone.new(current_user, params[:timezone])
+
+    svc.on(:set_timezone_success) do |val|
+      render :show, formats: :json
+    end
+    svc.on(:set_timezone_failure) do |errors|
+      render json: errors, status: 422
+    end
+
+    svc.call
+  end
+
   private
 
   def billing_profile_params

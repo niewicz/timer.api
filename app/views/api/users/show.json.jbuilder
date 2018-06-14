@@ -6,7 +6,8 @@ if current_user.present?
       :provider, 
       :email, 
       :first_name, 
-      :last_name)
+      :last_name,
+      :timezone)
 
     json.billing_profile do
       json.partial! 'api/users/billing_profile', user: current_user
