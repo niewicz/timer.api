@@ -1,0 +1,68 @@
+<div style="padding: 10px; font-weight: bold; margin: 0 0 10px; background: black; color: white; text-transform: uppercase; letter-spacing: 1px;">
+  Hello <%= @client.contact_person_name.presence || @client.name %>
+</div>
+
+<div style="padding: 0 10px 10px; margin: 20px 0 10px; font-size: 14px;">
+  <div>
+    Below you can find my time report for <%= @start_time.strftime('%B %Y') %>.
+  </div>
+  <% if @client.user.billing_profile.present? %>
+    <div>
+      In the bottom you will also find enclosed my banking details.
+    </div>
+    <div style="margin-top: 10px;">
+      Best reagrds,
+    </div>
+    <div>
+      <%= @client.user.billing_profile.person_name %>
+    </div>
+  <% end %>
+</div>
+
+<div style="width: 100%; border: none; padding: 10px 20px 10px 10px; background: #f5f5f6; font-weight: bold; letter-spacing: 1px;">
+  TIME RECORDS
+</div>
+<table style="width: 100%; border: none; padding: 10px 20px 10px 10px; background: #f5f5f6;">
+  <% @time_entries.each do |te| %>
+    <tr style="padding: 10px;">
+      <td style="max-width: 70%;">
+        <%= te.task.present? ? te.task.title : 'Undefined' %>
+      </td>
+      <td style="text-align: end; font-style: italic;">
+        <%= Timer::Utils::Duration.formatted(te.total_time) %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+
+<table style="width: 100%; border: none; padding: 10px 20px 10px 10px; background: #f5f5f6;">
+  <tr style="letter-spacing: 1px; padding: 10px; font-weight: bold;">
+    <td style="max-width: 70%;">
+      TOTAL TIME
+    </td>
+    <td style="text-align: end; font-style: italic;">
+      <%= Timer::Utils::Duration.formatted(@total_time) %>
+    </td>
+  </tr>
+</table>
+
+<% if @client.user.billing_profile.present? %>
+  <div style="padding: 10px; background: #f5f5f6; margin: 10px 0;">
+    <div style="letter-spacing: 1px; padding: 0 0 10px 0; font-weight: bold;">
+      PAYMENT DEATILS
+    </div>
+    <div>
+      <%= @client.user.billing_profile.account_owner %>
+    </div>
+    <div>
+      IBAN: <%= @client.user.billing_profile.iban %>
+    </div>
+    <div>
+      SWIFT: <%= @client.user.billing_profile.swift_code %>
+    </div>
+  </div>
+<% end %>
+
+<div style="background: black; color: white; padding: 15px; font-size: 14px; text-transform: uppercase; letter-spacing: 1px;">
+  Sent with <span style="font-weight: bold;">Timer app</span>
+</div>

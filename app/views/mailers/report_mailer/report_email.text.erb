@@ -1,0 +1,19 @@
+Here's the report for <%= @start_time.strftime('%B') %>:
+
+<% @time_entries.each do |te| %>
+  <%= te.task.present? ? te.task.title : 'Undefined' %> <%= Timer::Utils::Duration.formatted(te.total_time) %>
+<% end %>
+
+Total time: <%= Timer::Utils::Duration.formatted(@total_time) %>
+
+<% if @client.user.billing_profile.present? %>
+  Payment details:
+
+  <%= @client.user.billing_profile.account_owner %>
+  IBAN: <%= @client.user.billing_profile.iban %>
+  SWIFT: <%= @client.user.billing_profile.swift_code %>
+<% end %>
+
+
+--------------------------------------------------
+Sent with Timer app

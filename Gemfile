@@ -33,6 +33,11 @@ gem 'dry-validation', '~> 0.11.1'
 gem 'wisper', '2.0.0'
 gem 'turbolinks'
 gem 'uglifier'
-gem 'groupdate'
+
+gem 'sidekiq'
+gem 'sidekiq-cron'
+gem 'redis'
+gem 'figaro'
+gem 'rufus-scheduler', '~> 3.4.0'
 
 ruby "2.4.2"
