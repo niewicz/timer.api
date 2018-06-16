@@ -8,11 +8,11 @@ if time_entry.present?
   presenter = ::Timer::TimeEntryPresenter.new(time_entry)
 
   json.task do
-    json.partial! 'api/tasks/task_simple', task: presenter.task
+    json.partial! 'api/tasks/task', task: presenter.task
   end
 
   json.project do
-    json.partial! 'api/projects/project_simple', project: presenter.project
+    json.partial! 'api/projects/project', project: presenter.project
   end
 
   json.client do

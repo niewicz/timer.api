@@ -1,3 +1,3 @@
 json.project do
-  json.partial! 'api/projects/project_simple', project: @project
+  json.partial! 'api/projects/project', project: @project
 end

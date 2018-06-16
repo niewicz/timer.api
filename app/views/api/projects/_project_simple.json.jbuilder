@@ -1,11 +1,9 @@
 if project.present?
   json.(project,
     :id,
-    :title,
-    :description)
+    :title)
 
-  json.task_counter project.tasks.count
-  json.last_task project.tasks.last
+  json.total_tracked project.total_time
 
   json.client do
     json.partial! 'api/clients/client_simple', client: project.client

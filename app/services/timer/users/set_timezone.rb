@@ -9,7 +9,9 @@ class Timer::Users::SetTimezone < Timer::BaseService
   def call
     ActiveRecord::Base.transaction do 
 
+      p @timezone
       @user.assign_attributes(timezone: @timezone)
+      p @user
       errors = ::Timer::User::SetTimezoneForm.call(@user.attributes).messages
 
 

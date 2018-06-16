@@ -6,9 +6,9 @@ if task.present?
     :project_id,
     :total_time
   )
-  
-  json.project do
-    json.partial! 'api/projects/project', project: task.project
+
+  json.time_entries do
+    json.partial! 'api/time_entries/time_entry_simple', collection: task.time_entries, as: :time_entry
   end
 else
   json.nil!
