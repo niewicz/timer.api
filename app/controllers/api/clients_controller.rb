@@ -59,6 +59,16 @@ class Api::ClientsController < ApplicationController
     svc.call
   end
 
+  def send_report
+    if params[:time].present?
+      time = Time.zone.parse(params[:time])
+      ReportMailer.report_email(client, time.beginning_of_month, time.end_of_month).deliver_now
+      head 204
+    else
+      head 422
+    end
+  end
+
   private
 
   def client

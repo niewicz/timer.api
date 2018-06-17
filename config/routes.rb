@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   mount_devise_token_auth_for 'User', at: 'auth'
 
   namespace :api do
+    post 'clients/:id/send_report', to: 'clients#send_report'
     resources :clients, defaults: {format: 'json'}
     
     resources :projects, defaults: {format: 'json'}
