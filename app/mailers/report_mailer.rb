@@ -26,7 +26,8 @@ class ReportMailer < ApplicationMailer
       end
       
     @total_time = @time_entries.map{ |te| te.total_time }.reduce(:+)
-    @total_payment = @time_entries.map{ |te| te.to_pay }.reduce(:+).round(2)
+    @total_payment = @time_entries.map{ |te| te.to_pay }.reduce(:+)
+    @total_payment = @total_payment.present? ? @total_payment.round(2) : 0
   
 
     mail(
