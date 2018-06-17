@@ -6,7 +6,7 @@
   <div>
     Below you can find my time report for <%= @start_time.strftime('%B %Y') %>.
   </div>
-  <% if @client.user.billing_profile.present? %>
+  <% if @client.user.billing_profile.present? && @client.user.billing_profile.account_owner.present? && @client.user.billing_profile.iban.present? && @client.user.billing_profile.swift_code.present? %>
     <div>
       In the bottom you will also find enclosed my banking details.
     </div>
@@ -25,17 +25,24 @@
 <table style="width: 100%; border: none; padding: 10px 20px 10px 10px; background: #f5f5f6;">
   <% @time_entries.each do |te| %>
     <tr style="padding: 10px;">
-      <td style="max-width: 70%;">
+      <td style="max-width: 70%; padding: 0; display: flex;">
         <%= te.task.present? ? te.task.title : 'Undefined' %>
       </td>
       <td style="text-align: end; font-style: italic;">
-        <%= Timer::Utils::Duration.formatted(te.total_time) %>
+        <div>
+          <%= Timer::Utils::Duration.formatted(te.total_time) %>
+        </div>
+        <% if @client.user.billing_profile.present? && @client.user.billing_profile.currency.present? && @total_payment > 0 %>
+          <div style="color: #666670;">
+            <%= te.to_pay %><%= @client.user.billing_profile.currency %> (<%= te.task.price || 0 %><%= @client.user.billing_profile.currency %> per hour)
+          </div>
+        <% end %>
       </td>
     </tr>
   <% end %>
 </table>
 
-<table style="width: 100%; border: none; padding: 10px 20px 10px 10px; background: #f5f5f6;">
+<table style="width: 100%; border: none; padding: 10px 20px 10px 10px; background: #e5e5e7;">
   <tr style="letter-spacing: 1px; padding: 10px; font-weight: bold;">
     <td style="max-width: 70%;">
       TOTAL TIME
@@ -44,9 +51,19 @@
       <%= Timer::Utils::Duration.formatted(@total_time) %>
     </td>
   </tr>
+  <% if @client.user.billing_profile.present? && @client.user.billing_profile.currency.present? && @total_payment > 0 %>
+    <tr style="letter-spacing: 1px; padding: 10px; font-weight: bold;">
+      <td style="max-width: 70%;">
+        TO PAY
+      </td>
+      <td style="text-align: end; font-style: italic;">
+        <%= @total_payment %><%= @client.user.billing_profile.currency %>
+      </td>
+    </tr>
+  <% end %>
 </table>
 
-<% if @client.user.billing_profile.present? %>
+<% if @client.user.billing_profile.present? && @client.user.billing_profile.account_owner.present? && @client.user.billing_profile.iban.present? && @client.user.billing_profile.swift_code.present? %>
   <div style="padding: 10px; background: #f5f5f6; margin: 10px 0;">
     <div style="letter-spacing: 1px; padding: 0 0 10px 0; font-weight: bold;">
       PAYMENT DEATILS

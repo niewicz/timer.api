@@ -11,4 +11,11 @@ class TimeEntry < ApplicationRecord
   def total_time
     end_at - start_at
   end
+
+  def to_pay 
+    if task && task.price
+      return ((total_time / 3600) * task.price).round(2)
+    end
+    0
+  end
 end

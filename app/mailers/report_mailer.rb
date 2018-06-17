@@ -26,6 +26,8 @@ class ReportMailer < ApplicationMailer
       end
       
     @total_time = @time_entries.map{ |te| te.total_time }.reduce(:+)
+    @total_payment = @time_entries.map{ |te| te.to_pay }.reduce(:+).round(2)
+  
 
     mail(
       from: "#{@client.user.billing_profile.person_name} by Timer <#{Figaro.env.report_mailer_email}>",
