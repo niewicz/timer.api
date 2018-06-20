@@ -13,7 +13,6 @@ class Api::TimeEntriesController < ApplicationController
     @grouped_time_entries = svc.call
     @total = svc.total
 
-    p @grouped_time_entries
     render :index_grouped, formats: :json
   end
 

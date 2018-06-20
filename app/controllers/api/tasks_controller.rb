@@ -75,6 +75,8 @@ class Api::TasksController < ApplicationController
       :q,
       :limit,
       :offset,
+      :order,
+      :order_by,
       :project_id,
       :client_id
     ).to_h

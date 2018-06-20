@@ -1,4 +1,6 @@
 class Timer::Tasks::Get < Timer::BaseService
+  ORDER_BY = ['id', 'title', 'created_at', 'updated_at'].freeze
+  ORDERS = ['ASC', 'DESC'].freeze
 
   def initialize(user, params)
     @user = user.presence || fail(ArgumentError)
@@ -11,6 +13,7 @@ class Timer::Tasks::Get < Timer::BaseService
     by_project!
     by_client!
     search!
+    order!
 
     offset!
     limit!
@@ -33,6 +36,14 @@ class Timer::Tasks::Get < Timer::BaseService
   def search!
     return unless @params[:q].present?
     @ar_query = @ar_query.where('title ilike ?', "%#{@params[:q]}%")
+  end
+
+  def order! 
+    return unless @params[:order_by].present? && 
+      ORDER_BY.include?(@params[:order_by]) &&
+      @params[:order].present? &&
+      ORDERS.include?(@params[:order]) 
+    @ar_query = @ar_query.order("#{@params[:order_by]} #{@params[:order]}")
   end
 
   def offset!
