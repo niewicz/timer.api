@@ -29,9 +29,6 @@ class DeviseTokenAuthCreateUsers < ActiveRecord::Migration[5.1]
       t.string   :unconfirmed_email
 
       ## User Info
-      t.string :first_name
-      t.string :last_name
-      t.string :image
       t.string :email
 
       ## Tokens
