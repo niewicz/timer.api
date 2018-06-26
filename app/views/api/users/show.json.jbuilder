@@ -5,8 +5,6 @@ if current_user.present?
       :uid, 
       :provider, 
       :email, 
-      :first_name, 
-      :last_name,
       :timezone)
 
     json.billing_profile do
