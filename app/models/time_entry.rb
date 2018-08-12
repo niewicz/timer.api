@@ -9,7 +9,11 @@ class TimeEntry < ApplicationRecord
   end
 
   def total_time
-    end_at - start_at
+    if end_at 
+      end_at - start_at
+    else
+      DateTime.now - start_at
+    end
   end
 
   def to_pay 
